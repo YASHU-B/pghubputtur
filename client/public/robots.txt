@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://pghubputtur.vercel.app/sitemap.xml
