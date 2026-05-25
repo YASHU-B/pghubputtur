@@ -1,4 +1,3 @@
-
 // This is a serverless function for Vercel/Supabase to send trial expiration emails
 // You will need to add an API key from an email service like Resend.com to your .env
 // npm install resend
