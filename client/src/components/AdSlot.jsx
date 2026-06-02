@@ -52,7 +52,7 @@ export default function AdSlot({ slot, format = 'auto', responsive = 'true', cla
         <ins
           className="adsbygoogle"
           style={{ display: 'block', width: '100%', minHeight: '90px' }}
-          data-ad-client="ca-pub-9428585973711904"
+          data-ad-client="ca-pub-7624075828918805"
           data-ad-slot={slot}
           data-ad-format={format}
           data-full-width-responsive={responsive}
