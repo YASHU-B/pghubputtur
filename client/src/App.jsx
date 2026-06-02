@@ -21,6 +21,7 @@ import {
 import { supabase } from './supabase';
 import ListingCard from './components/ListingCard';
 import { Navigate } from 'react-router-dom';
+import AdSlot from './components/AdSlot';
 
 // ─── Scroll To Top ──────────────────────────────────────────────────────────
 const ScrollToTop = () => {
@@ -301,6 +302,11 @@ const HeroLanding = () => {
           </div>
         </div>
       </section>
+
+      {/* Sponsored Ad Banner */}
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <AdSlot slot="9382048591" />
+      </div>
 
       {/* ── OWNER SECTION ── */}
       <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-20">

@@ -4,6 +4,7 @@ import { supabase } from '../supabase';
 import { MapPin, Check, ArrowLeft, Phone, MessageCircle, Home, BedDouble, Map, Star, User, Send, Shield, Navigation, Trash2, ChevronLeft, ChevronRight, Share2 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import MapView from '../components/MapView';
+import AdSlot from '../components/AdSlot';
 
 const ListingDetail = () => {
     const { id } = useParams();
@@ -323,6 +324,9 @@ const ListingDetail = () => {
                             ))}
                         </div>
                     </div>
+
+                    {/* Sponsored Ad Slot */}
+                    <AdSlot slot="1849204859" />
 
                     {/* Amenities */}
                     {listing.amenities?.length > 0 && (

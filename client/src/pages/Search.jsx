@@ -1,9 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Fragment } from 'react';
 import { supabase } from '../supabase';
 import { Search as SearchIcon, MapPin, Filter, Users, Building2, Map, LayoutGrid } from 'lucide-react';
 import { Link, useSearchParams, useNavigate } from 'react-router-dom';
 import ListingCard from '../components/ListingCard';
 import MapView from '../components/MapView';
+import AdSlot from '../components/AdSlot';
 
 const SkeletonCard = () => (
   <div className="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100">
@@ -182,7 +183,14 @@ const Search = () => {
             ) : (
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8">
                     {listings.map((listing, idx) => (
-                        <ListingCard key={listing.id} listing={listing} idx={idx} />
+                        <Fragment key={listing.id}>
+                            <ListingCard listing={listing} idx={idx} />
+                            {(idx + 1) % 3 === 0 && (
+                                <div className="col-span-full">
+                                    <AdSlot slot="4810293847" />
+                                </div>
+                            )}
+                        </Fragment>
                     ))}
                 </div>
             )}
