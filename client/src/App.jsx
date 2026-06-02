@@ -589,7 +589,9 @@ const Footer = () => (
               <div className="p-2 bg-gray-100 rounded-lg">
                 <Globe className="h-4 w-4 text-gray-400" />
               </div>
-              <span className="font-medium">Made with ❤️ in India</span>
+              <span className="font-medium">
+                Made with ❤️ by <a href="https://wa.me/917569441767" target="_blank" rel="noopener noreferrer" className="text-orange-600 hover:underline">yashu</a>
+              </span>
             </li>
           </ul>
         </div>
