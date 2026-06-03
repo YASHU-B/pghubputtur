@@ -38,7 +38,7 @@ const ThemePurge = () => {
     // Force removal of dark classes that might be residual
     document.documentElement.classList.remove('dark');
     document.body.classList.remove('dark');
-    
+
     // Clear theme settings only once, don't clear entire browser cache
     localStorage.removeItem('theme');
   }, []);
@@ -55,7 +55,7 @@ const LoginRedirector = () => {
     // Only redirect if on login/register/home pages
     const isAuthPage = ['/login', '/register'].includes(pathname);
     const isHome = pathname === '/';
-    
+
     if (!loading && user && (isAuthPage || (isHome && user.role === 'owner'))) {
       if (user.role === 'admin') navigate('/admin');
       else navigate('/owner');
@@ -83,7 +83,7 @@ const ProtectedRoute = ({ children, allowedRoles }) => {
       </div>
       <h2 className="text-xl font-bold text-gray-900 mb-2">Access Restricted</h2>
       <p className="text-gray-500 max-w-xs mb-6">Your account (Role: {user.role || 'none'}) does not have permission to access this page.</p>
-      
+
       {user.dbError && (
         <div className="bg-red-50 text-red-600 text-xs p-4 rounded-xl mb-6 max-w-md text-left w-full border border-red-100 overflow-auto">
           <p className="font-bold mb-1">Database Error Details:</p>
@@ -123,7 +123,7 @@ const HeroLanding = () => {
           .eq('is_verified', true)
           .order('created_at', { ascending: false })
           .limit(3);
-          
+
         if (error) throw error;
         setListings(data);
         localStorage.setItem('featured_listings', JSON.stringify(data));
