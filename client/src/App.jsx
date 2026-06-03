@@ -584,7 +584,13 @@ const Footer = () => (
               <div className="p-2 bg-orange-50 rounded-lg">
                 <Mail className="h-4 w-4 text-orange-600" />
               </div>
-              <a href="mailto:support@pghub.com" className="hover:text-orange-600 transition-colors font-medium">support@pghub.com</a>
+              <a href="mailto:pghubputtur@gmail.com" className="hover:text-orange-600 transition-colors font-medium">pghubputtur@gmail.com</a>
+            </li>
+            <li className="flex items-center gap-3 text-sm">
+              <div className="p-2 bg-orange-50 rounded-lg">
+                <PhoneCall className="h-4 w-4 text-orange-600" />
+              </div>
+              <a href="tel:7569441767" className="hover:text-orange-600 transition-colors font-medium">+91 7569441767</a>
             </li>
             <li className="flex items-center gap-3 text-sm">
               <div className="p-2 bg-gray-100 rounded-lg">
