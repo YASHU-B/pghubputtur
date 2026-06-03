@@ -20,7 +20,7 @@ export default async function handler(req, res) {
     key_secret,
   });
 
-  const { amount, currency = 'INR', receipt = 'receipt_' + Date.now() } = req.body;
+  const { amount, currency = 'INR', receipt = 'receipt_' + Date.now(), userId } = req.body;
 
   if (!amount || amount < 100) {
     return res.status(400).json({ message: 'Amount must be at least 100 paise (₹1)' });
@@ -31,6 +31,9 @@ export default async function handler(req, res) {
       amount: Math.floor(amount), // in paise, must be integer
       currency,
       receipt,
+      notes: {
+        userId: userId || '',
+      },
     };
 
     console.log('Creating order with options:', options);

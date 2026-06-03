@@ -37,16 +37,22 @@ const ListingDetail = () => {
         const fetchListing = async () => {
             const { data, error } = await supabase.from('listings').select('*').eq('id', id).single();
             if (data) {
-                setListing({
-                    ...data,
-                    ownerId: data.owner_id,
-                    ownerName: data.owner_name || 'PG Owner',
-                    avgRating: data.avg_rating,
-                    reviewCount: data.review_count,
-                    foodAvailable: data.food_available,
-                    genderPreference: data.gender_preference,
-                    isVerified: data.is_verified,
-                });
+                const viewerIsOwner = user && user.id === data.owner_id;
+                const viewerIsAdmin = user && user.role === 'admin';
+                if (!data.is_verified && !viewerIsOwner && !viewerIsAdmin) {
+                    setListing(null);
+                } else {
+                    setListing({
+                        ...data,
+                        ownerId: data.owner_id,
+                        ownerName: data.owner_name || 'PG Owner',
+                        avgRating: data.avg_rating,
+                        reviewCount: data.review_count,
+                        foodAvailable: data.food_available,
+                        genderPreference: data.gender_preference,
+                        isVerified: data.is_verified,
+                    });
+                }
             }
             setLoading(false);
         };
@@ -83,7 +89,7 @@ const ListingDetail = () => {
             supabase.removeChannel(listingSub);
             supabase.removeChannel(reviewsSub);
         };
-    }, [id]);
+    }, [id, user]);
 
     // Fetch pending reviews only for owner
     useEffect(() => {

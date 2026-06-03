@@ -120,6 +120,7 @@ const HeroLanding = () => {
         const { data, error } = await supabase
           .from('listings')
           .select('*')
+          .eq('is_verified', true)
           .order('created_at', { ascending: false })
           .limit(3);
           

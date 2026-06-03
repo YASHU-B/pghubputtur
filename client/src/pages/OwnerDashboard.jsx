@@ -120,7 +120,10 @@ const OwnerDashboard = () => {
             const res = await fetch('/api/create-order', {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ amount: 29900 }) // ₹299 in paise
+                body: JSON.stringify({ 
+                    amount: 29900, // ₹299 in paise
+                    userId: user.uid || user.id
+                })
             });
 
             if (!res.ok) {
@@ -316,6 +319,17 @@ const OwnerDashboard = () => {
                             {isSaving ? 'Activating...' : 'Activate Pro — ₹299/mo'}
                         </button>
                     </div>
+                </div>
+            )}
+
+            {/* Refund & Cancellation Policy Notice */}
+            {!user?.isSubscribed && (
+                <div className="bg-gray-50 border border-gray-150 rounded-xl p-4 mb-7 text-xs text-gray-500 flex flex-col gap-1 shadow-sm">
+                    <p className="font-bold text-gray-700">Cancellation & Refund Policy</p>
+                    <p className="leading-relaxed">
+                        Once paid, the Pro activation subscription fee of ₹299 is **strictly non-refundable**. 
+                        Cancellation requests will ensure that no future payments are charged, but no refunds will be issued for the current active period.
+                    </p>
                 </div>
             )}
 

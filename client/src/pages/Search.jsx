@@ -53,7 +53,8 @@ const Search = () => {
         const fetchListings = async () => {
             const { data, error } = await supabase
                 .from('listings')
-                .select('*');
+                .select('*')
+                .eq('is_verified', true);
 
             if (error) {
                 console.error('Error fetching listings:', error);
