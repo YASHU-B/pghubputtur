@@ -35,11 +35,42 @@ const ListingDetail = () => {
         setLoading(true);
         // Real-time listing data
         const fetchListing = async () => {
-            const { data, error } = await supabase.from('listings').select('*').eq('id', id).single();
+            const { data, error } = await supabase
+                .from('listings')
+                .select('*, owner:users(subscription_status, subscription_expires_at, created_at)')
+                .eq('id', id)
+                .single();
+                
             if (data) {
                 const viewerIsOwner = user && user.id === data.owner_id;
                 const viewerIsAdmin = user && user.role === 'admin';
-                if (!data.is_verified && !viewerIsOwner && !viewerIsAdmin) {
+                
+                // Determine if owner's subscription is active
+                let hasActiveSubscription = true;
+                if (data.owner) {
+                    const isSubscribed = data.owner.subscription_status === 'active';
+                    let isValidSub = isSubscribed;
+                    if (isSubscribed && data.owner.subscription_expires_at) {
+                        const expiresAt = new Date(data.owner.subscription_expires_at);
+                        if (expiresAt < new Date()) {
+                            isValidSub = false;
+                        }
+                    }
+
+                    let trialDaysLeft = 0;
+                    if (data.owner.created_at) {
+                        const createdAt = new Date(data.owner.created_at);
+                        const now = new Date();
+                        const diffTime = now - createdAt;
+                        const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+                        trialDaysLeft = Math.max(0, 30 - diffDays);
+                    }
+
+                    const isTrial = !isValidSub && trialDaysLeft > 0;
+                    hasActiveSubscription = isValidSub || isTrial;
+                }
+
+                if ((!data.is_verified || !hasActiveSubscription) && !viewerIsOwner && !viewerIsAdmin) {
                     setListing(null);
                 } else {
                     setListing({

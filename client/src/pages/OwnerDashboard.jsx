@@ -264,7 +264,7 @@ const OwnerDashboard = () => {
             </div>
 
             {/* Subscription / Trial Gate */}
-            {user?.subscription_status === 'active' ? (
+            {user?.isSubscribed && !user?.isTrial ? (
                 <div className="bg-gradient-to-r from-orange-600 to-orange-500 rounded-xl p-5 mb-7 text-white relative overflow-hidden shadow-lg shadow-orange-100">
                     <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-2xl pointer-events-none" />
                     <div className="relative z-10 flex flex-col sm:flex-row items-center justify-between gap-4">

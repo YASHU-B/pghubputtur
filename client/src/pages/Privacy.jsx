@@ -38,6 +38,16 @@ const Privacy = () => {
                         <h2 className="text-xl font-bold text-gray-900 mb-3">4. Your Rights</h2>
                         <p>You reserve the right to review, update, or completely delete your data from our servers. You may clear your account settings by contacting our support team or navigating to your dashboard settings.</p>
                     </section>
+
+                    <section>
+                        <h2 className="text-xl font-bold text-gray-900 mb-3">5. Google AdSense & Third-Party Cookies</h2>
+                        <p>We use Google AdSense to serve advertisements on our platform to help cover operational costs. Please note the following disclosures regarding how Google and third parties serve ads on our site:</p>
+                        <ul className="list-disc pl-5 mt-2 space-y-2">
+                            <li><strong>Cookies & Ad Serving:</strong> Third-party vendors, including Google, use cookies to serve ads based on a user's prior visits to our website or other websites on the internet.</li>
+                            <li><strong>Personalized Ads:</strong> Google's use of advertising cookies enables it and its partners to serve ads to our users based on their visit to our site and/or other sites on the Internet.</li>
+                            <li><strong>Opting Out:</strong> You can opt out of personalized advertising by visiting the <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer" className="text-orange-600 hover:underline font-bold">Google Ads Settings</a> page. Alternatively, you can opt out of a third-party vendor's use of cookies for personalized advertising by visiting the <a href="https://www.aboutads.info" target="_blank" rel="noopener noreferrer" className="text-orange-600 hover:underline font-bold">AboutAds.info</a> website.</li>
+                        </ul>
+                    </section>
                 </div>
             </div>
         </div>

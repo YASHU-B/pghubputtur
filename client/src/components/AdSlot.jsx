@@ -15,22 +15,33 @@ export default function AdSlot({ slot, format = 'auto', responsive = 'true', cla
     if (initialized.current) return;
     initialized.current = true;
 
-    const checkAdsense = () => {
+    const initAd = () => {
       try {
-        if (window.adsbygoogle) {
-          (window.adsbygoogle = window.adsbygoogle || []).push({});
-        } else {
-          setIsBlocked(true);
-        }
+        (window.adsbygoogle = window.adsbygoogle || []).push({});
       } catch (err) {
-        console.warn('AdSense initialization error:', err);
+        console.warn('AdSense push error:', err);
         setIsBlocked(true);
       }
     };
 
-    // Run check asynchronously to avoid triggering synchronous setState warnings
-    const timer = setTimeout(checkAdsense, 50);
-    return () => clearTimeout(timer);
+    // Dynamically insert the Google AdSense script tag to prevent loading on non-ad pages (violations)
+    const existingScript = document.querySelector('script[src*="adsbygoogle.js"]');
+    if (!existingScript) {
+      const script = document.createElement('script');
+      script.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7624075828918805';
+      script.async = true;
+      script.crossOrigin = 'anonymous';
+      script.onload = () => {
+        initAd();
+      };
+      script.onerror = () => {
+        console.warn('AdSense script failed to load.');
+        setIsBlocked(true);
+      };
+      document.head.appendChild(script);
+    } else {
+      initAd();
+    }
   }, []);
 
   if (isBlocked) {

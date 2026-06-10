@@ -1,4 +1,4 @@
-import { HashRouter as Router, Routes, Route, Link, useNavigate, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link, useNavigate, useLocation } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { useState, useEffect } from 'react';
 import Login from './pages/Login';
@@ -10,6 +10,8 @@ import AddListing from './pages/AddListing';
 import AdminDashboard from './pages/AdminDashboard';
 import Privacy from './pages/Privacy';
 import Terms from './pages/Terms';
+import About from './pages/About';
+import FAQ from './pages/FAQ';
 import './App.css';
 import {
   Menu, X, Building2, Search as SearchIcon,
@@ -119,14 +121,41 @@ const HeroLanding = () => {
       try {
         const { data, error } = await supabase
           .from('listings')
-          .select('*')
+          .select('*, owner:users(subscription_status, subscription_expires_at, created_at)')
           .eq('is_verified', true)
-          .order('created_at', { ascending: false })
-          .limit(3);
+          .order('created_at', { ascending: false });
 
         if (error) throw error;
-        setListings(data);
-        localStorage.setItem('featured_listings', JSON.stringify(data));
+
+        // Filter out listings from owners with expired subscriptions/trials
+        const filtered = (data || []).filter(item => {
+          if (!item.owner) return true; // Fallback if owner record is missing
+
+          const isSubscribed = item.owner.subscription_status === 'active';
+          let isValidSub = isSubscribed;
+          if (isSubscribed && item.owner.subscription_expires_at) {
+            const expiresAt = new Date(item.owner.subscription_expires_at);
+            if (expiresAt < new Date()) {
+              isValidSub = false;
+            }
+          }
+
+          let trialDaysLeft = 0;
+          if (item.owner.created_at) {
+            const createdAt = new Date(item.owner.created_at);
+            const now = new Date();
+            const diffTime = now - createdAt;
+            const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+            trialDaysLeft = Math.max(0, 30 - diffDays);
+          }
+
+          const isTrial = !isValidSub && trialDaysLeft > 0;
+          return isValidSub || isTrial;
+        });
+
+        const sliced = filtered.slice(0, 3);
+        setListings(sliced);
+        localStorage.setItem('featured_listings', JSON.stringify(sliced));
       } catch (err) {
         console.error('Fetch error:', err);
       } finally {
@@ -561,8 +590,8 @@ const Footer = () => (
           <h4 className="text-gray-900 font-bold mb-6 text-xs uppercase tracking-[0.2em]">Explore</h4>
           <ul className="space-y-3">
             <li><Link to="/search" className="text-sm hover:text-orange-600 transition-colors">Find PGs</Link></li>
-            <li><Link to="/search" className="text-sm hover:text-orange-600 transition-colors">Recently Added</Link></li>
-            <li><Link to="/" className="text-sm hover:text-orange-600 transition-colors">How it Works</Link></li>
+            <li><Link to="/about" className="text-sm hover:text-orange-600 transition-colors">About Us</Link></li>
+            <li><Link to="/faq" className="text-sm hover:text-orange-600 transition-colors">FAQ</Link></li>
           </ul>
         </div>
 
@@ -639,6 +668,8 @@ function App() {
               <Route path="/admin" element={<ProtectedRoute allowedRoles={['admin']}><AdminDashboard /></ProtectedRoute>} />
               <Route path="/privacy" element={<Privacy />} />
               <Route path="/terms" element={<Terms />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/faq" element={<FAQ />} />
             </Routes>
           </main>
           <Footer />

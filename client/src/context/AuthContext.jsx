@@ -48,6 +48,13 @@ export const AuthProvider = ({ children }) => {
 
         // Calculate subscription/trial status
         let isSubscribed = profile?.subscription_status === 'active';
+        if (isSubscribed && profile?.subscription_expires_at) {
+            const expiresAt = new Date(profile.subscription_expires_at);
+            if (expiresAt < new Date()) {
+                isSubscribed = false;
+            }
+        }
+        
         let trialDaysLeft = 0;
         let isTrial = false;
 

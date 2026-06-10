@@ -34,14 +34,21 @@ const AdminDashboard = () => {
                 const { data: usersData } = await supabase.from('users').select('*').order('created_at', { ascending: false });
                 if (usersData) {
                     setUsers(usersData.map(d => {
-                        // Calculate trial status
+                        // Calculate subscription/trial status
+                        let isSubscribed = d.subscription_status === 'active';
+                        if (isSubscribed && d.subscription_expires_at) {
+                            const expiresAt = new Date(d.subscription_expires_at);
+                            if (expiresAt < new Date()) {
+                                isSubscribed = false;
+                            }
+                        }
+
                         const createdAt = new Date(d.created_at);
                         const now = new Date();
                         const diffTime = now - createdAt;
                         const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
                         const trialDaysLeft = Math.max(0, 30 - diffDays);
-                        const isTrial = d.subscription_status !== 'active' && trialDaysLeft > 0;
-                        const isSubscribed = d.subscription_status === 'active';
+                        const isTrial = !isSubscribed && trialDaysLeft > 0;
 
                         return {
                             ...d,

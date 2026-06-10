@@ -33,7 +33,7 @@ export default async function handler(req, res) {
               <li>Receive direct inquiries via WhatsApp and Phone</li>
             </ul>
           </div>
-          <a href="https://pghubputtur.vercel.app/#/owner" style="display: inline-block; background-color: #ea580c; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: bold;">Upgrade to Pro Now</a>
+          <a href="https://pghubputtur.vercel.app/owner" style="display: inline-block; background-color: #ea580c; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: bold;">Upgrade to Pro Now</a>
           <p style="margin-top: 20px; font-size: 12px; color: #9ca3af;">If you have any questions, just reply to this email.</p>
         </div>
       `,

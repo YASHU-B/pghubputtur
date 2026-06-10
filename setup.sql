@@ -48,7 +48,7 @@ ADD COLUMN IF NOT EXISTS rules TEXT[] DEFAULT '{}';
 ALTER TABLE public.listings ENABLE ROW LEVEL SECURITY;
 
 -- Only show listings in public search if:
--- 1. Owner's subscription is 'active' 
+-- 1. Owner's subscription is 'active' and has not expired (subscription_expires_at is null or in the future)
 -- 2. OR Owner is within their 30-day free trial period
 DROP POLICY IF EXISTS "Public Select Listings" ON public.listings;
 CREATE POLICY "Public Select Listings" ON public.listings FOR SELECT 
@@ -57,7 +57,7 @@ USING (
         SELECT 1 FROM public.users 
         WHERE users.id = listings.owner_id 
         AND (
-            users.subscription_status = 'active' 
+            (users.subscription_status = 'active' AND (users.subscription_expires_at IS NULL OR users.subscription_expires_at > NOW()))
             OR (users.created_at > (NOW() - INTERVAL '30 days'))
         )
     )
