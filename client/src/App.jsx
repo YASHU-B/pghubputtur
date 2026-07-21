@@ -146,7 +146,7 @@ const HeroLanding = () => {
             const now = new Date();
             const diffTime = now - createdAt;
             const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-            trialDaysLeft = Math.max(0, 30 - diffDays);
+            trialDaysLeft = Math.max(0, 180 - diffDays);
           }
 
           const isTrial = !isValidSub && trialDaysLeft > 0;
@@ -345,7 +345,7 @@ const HeroLanding = () => {
           <div className="relative z-10 max-w-2xl mx-auto">
             <Crown className="h-10 w-10 text-yellow-300 mx-auto mb-6" />
             <h2 className="text-3xl sm:text-4xl font-black mb-4">List Your PG on pghub</h2>
-            <p className="text-orange-100 mb-10 font-medium">Get direct inquiries from thousands of students. Only ₹299/month for unlimited listings.</p>
+            <p className="text-orange-100 mb-10 font-medium">Get direct inquiries from thousands of students. Only ₹99/month for unlimited listings.</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/register" className="bg-white text-orange-600 px-10 py-4 rounded-xl font-black text-lg hover:bg-orange-50 transition-all shadow-xl">
                 Become a Partner

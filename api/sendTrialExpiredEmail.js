@@ -21,14 +21,14 @@ export default async function handler(req, res) {
           <h1 style="color: #ea580c;">Hi ${ownerName},</h1>
           <p style="font-size: 16px; color: #4b5563;">
             ${daysLeft <= 0 
-              ? 'Your 30-day free trial on StayBook has expired. Your listings are now hidden from the public search results.' 
+              ? 'Your 6-month free trial on StayBook has expired. Your listings are now hidden from the public search results.' 
               : `Your free trial on StayBook has only ${daysLeft} days remaining.`
             }
           </p>
           <div style="background-color: #fff7ed; padding: 20px; border-radius: 8px; margin: 20px 0;">
             <p style="margin: 0; font-weight: bold; color: #9a3412;">What happens next?</p>
             <ul style="color: #9a3412; font-size: 14px;">
-              <li>Upgrade to Pro for just ₹299/month</li>
+              <li>Upgrade to Pro for just ₹99/month</li>
               <li>Keep your PG visible to thousands of students</li>
               <li>Receive direct inquiries via WhatsApp and Phone</li>
             </ul>

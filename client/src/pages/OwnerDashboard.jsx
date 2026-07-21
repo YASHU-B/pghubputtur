@@ -121,7 +121,7 @@ const OwnerDashboard = () => {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ 
-                    amount: 29900, // ₹299 in paise
+                    amount: 9900, // ₹99 in paise
                     userId: user.uid || user.id
                 })
             });
@@ -295,12 +295,12 @@ const OwnerDashboard = () => {
                                 <Crown className="h-6 w-6 text-yellow-300" />
                             </div>
                             <div>
-                                <p className="font-black text-lg">30-Day Free Trial Active</p>
+                                <p className="font-black text-lg">6-Month Free Trial Active</p>
                                 <p className="text-emerald-50 text-sm font-medium">{user.trialDaysLeft} days left in your free trial. Enjoy all Pro features!</p>
                             </div>
                         </div>
                         <button onClick={handleSubscribe} disabled={isSaving} className="bg-white text-emerald-700 px-5 py-2.5 rounded-xl font-bold hover:bg-emerald-50 transition-all text-xs shadow-md">
-                            Upgrade Early — ₹299/mo
+                            Upgrade Early — ₹99/mo
                         </button>
                     </div>
                 </div>
@@ -313,10 +313,10 @@ const OwnerDashboard = () => {
                                 <Crown className="h-5 w-5 text-yellow-300" />
                                 <p className="font-black text-lg">Trial Expired</p>
                             </div>
-                            <p className="text-orange-100 text-sm">Your 30-day free trial has ended. Subscribe for ₹299/month to keep your listings active.</p>
+                            <p className="text-orange-100 text-sm">Your 6-month free trial has ended. Subscribe for ₹99/month to keep your listings active.</p>
                         </div>
                         <button onClick={handleSubscribe} disabled={isSaving} className="flex-shrink-0 bg-white text-orange-600 px-6 py-3 rounded-xl font-black hover:bg-orange-50 transition-all shadow-xl min-h-[auto] text-sm">
-                            {isSaving ? 'Activating...' : 'Activate Pro — ₹299/mo'}
+                            {isSaving ? 'Activating...' : 'Activate Pro — ₹99/mo'}
                         </button>
                     </div>
                 </div>
@@ -327,7 +327,7 @@ const OwnerDashboard = () => {
                 <div className="bg-gray-50 border border-gray-150 rounded-xl p-4 mb-7 text-xs text-gray-500 flex flex-col gap-1 shadow-sm">
                     <p className="font-bold text-gray-700">Cancellation & Refund Policy</p>
                     <p className="leading-relaxed">
-                        Once paid, the Pro activation subscription fee of ₹299 is **strictly non-refundable**. 
+                        Once paid, the Pro activation subscription fee of ₹99 is **strictly non-refundable**. 
                         Cancellation requests will ensure that no future payments are charged, but no refunds will be issued for the current active period.
                     </p>
                 </div>
@@ -487,7 +487,7 @@ const OwnerDashboard = () => {
                             </div>
                             <div>
                                 <p className="font-bold text-gray-800 text-sm">pghub Pro — Active</p>
-                                <p className="text-xs text-gray-400">₹299/month · All features unlocked</p>
+                                <p className="text-xs text-gray-400">₹99/month · All features unlocked</p>
                             </div>
                         </div>
                         <span className="flex items-center gap-1 bg-emerald-50 text-emerald-600 px-3 py-1.5 rounded-xl text-xs font-bold min-h-[auto]">

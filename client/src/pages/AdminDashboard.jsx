@@ -47,7 +47,7 @@ const AdminDashboard = () => {
                         const now = new Date();
                         const diffTime = now - createdAt;
                         const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-                        const trialDaysLeft = Math.max(0, 30 - diffDays);
+                        const trialDaysLeft = Math.max(0, 180 - diffDays);
                         const isTrial = !isSubscribed && trialDaysLeft > 0;
 
                         return {
@@ -154,7 +154,7 @@ const AdminDashboard = () => {
                 </div>
                 <div className="stat-card-rose p-4 rounded-xl">
                     <p className="text-[11px] text-gray-500 font-bold uppercase tracking-wider">Revenue</p>
-                    <p className="text-2xl font-black text-rose-600">₹{subscribedOwners.length * 299}</p>
+                    <p className="text-2xl font-black text-rose-600">₹{subscribedOwners.length * 99}</p>
                 </div>
             </div>
 

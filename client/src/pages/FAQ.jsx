@@ -37,7 +37,7 @@ export default function FAQ() {
     },
     {
       q: "What is the listing subscription fee?",
-      a: "To keep our platform 100% free for students and run verified services, we charge a flat fee of ₹299/month for PG owners. This gives you unlimited listings, direct user calls, and prominent placement. We never charge commission on bookings."
+      a: "To keep our platform 100% free for students and run verified services, we charge a flat fee of ₹99/month for PG owners. This gives you unlimited listings, direct user calls, and prominent placement. We never charge commission on bookings."
     },
     {
       q: "How does Razorpay payment verification work?",

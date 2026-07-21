@@ -62,7 +62,7 @@ const Register = () => {
 
                     {/* Subscription info */}
                     <div className="bg-orange-50 border border-orange-100 rounded-xl p-4 mb-6">
-                        <p className="text-sm font-bold text-orange-800 mb-1">pghub Pro — ₹299/month</p>
+                        <p className="text-sm font-bold text-orange-800 mb-1">pghub Pro — ₹99/month</p>
                         <ul className="text-xs text-orange-600 space-y-0.5">
                             <li>✓ Unlimited PG listings</li>
                             <li>✓ Direct student inquiries via phone & WhatsApp</li>

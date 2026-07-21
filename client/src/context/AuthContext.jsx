@@ -63,7 +63,7 @@ export const AuthProvider = ({ children }) => {
             const now = new Date();
             const diffTime = now - createdAt;
             const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-            trialDaysLeft = Math.max(0, 30 - diffDays);
+            trialDaysLeft = Math.max(0, 180 - diffDays);
             
             if (isSubscribed) {
                 isTrial = false;
